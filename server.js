@@ -18,3 +18,5 @@ app.use('/account', accountRouter)
 app.use('/contacts', contanctsRouter)
 
 app.listen(3000, () => console.log('Server started '))
+
+module.exports = app
