@@ -23,11 +23,8 @@ router.post('/register', validateUserData, async (req, res) =>  {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         const user = new User({ email: req.body.email, password: hashedPassword })
         user.save();
-        const jwt = createJwt(user.email)
-        res.json({
-            'user': user.email,
-            'accessToken': jwt
-        })
+        const loginResponse = await prepareLoginRespose(user)
+        res.json(loginResponse)
     } catch (err) {
         console.error(err);    
         res.status(500).send()
@@ -49,13 +46,8 @@ router.post('/login', validateUserData, async (req, res) =>  {
     }
     try {
         if(await bcrypt.compare(req.body.password, user.password)) {
-            const accessToken = createJwt(user.email)
-            const refreshToken = jwt.sign(user.email, process.env.REFRESH_TOKEN_SECRET)
-
-            var rt = new RefreshToken({ token: refreshToken })
-            await rt.save()
-
-            res.json({ accessToken: accessToken, refreshToken: refreshToken})
+            const loginResponse = await prepareLoginRespose(user)
+            res.json(loginResponse)
             return
         }
         else {
@@ -66,6 +58,16 @@ router.post('/login', validateUserData, async (req, res) =>  {
           res.status(500).send()
       }
 })
+
+async function prepareLoginRespose(user) {
+    const accessToken = createJwt(user.email)
+    const refreshToken = jwt.sign(user.email, process.env.REFRESH_TOKEN_SECRET)
+
+    let rt = new RefreshToken({ token: refreshToken })
+    await rt.save()
+
+    return { email: user.email, accessToken: accessToken, refreshToken: refreshToken}
+}
 
 router.post('/refreshtoken', async (req, res) => {
     const reqRefreshToken = req.body.refreshToken
@@ -91,7 +93,7 @@ router.post('/refreshtoken', async (req, res) => {
   })
 
 function createJwt(email) {
-    return jwt.sign({email:email}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
+    return jwt.sign({email:email}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5m' })
 }
 
 function validateUserData(req, res, next) {
