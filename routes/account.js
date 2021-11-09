@@ -20,6 +20,10 @@ router.get('/echo', async (req, res) => {
 
 router.post('/register', validateUserData, async (req, res) =>  {
     try {
+        if(await User.exists({email: req.body.email})) {
+            return res.status(400).send('User already exists')
+        }
+
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         const user = new User({ email: req.body.email, password: hashedPassword })
         user.save();
@@ -38,9 +42,8 @@ router.post('/login', validateUserData, async (req, res) =>  {
     } catch (err) {
         console.error(err);    
         res.status(500).send()
-        return
     }
-    
+
     if(!user) {
         return res.status(401).send('Unknown user or password')
     }
