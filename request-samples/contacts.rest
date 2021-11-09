@@ -1,0 +1,3 @@
+GET http://localhost:3000/contacts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhdmVsQGxvY2FsaG9zdC5sb2NhbCIsImlhdCI6MTYzNjQ2NDE5MSwiZXhwIjoxNjM2NDY1MDkxfQ.CY1R0EzGlBazsf3x6OwoNpgG3Wc76vG-Rm5etAFFQas
+###
