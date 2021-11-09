@@ -62,16 +62,6 @@ router.post('/login', validateUserData, async (req, res) =>  {
       }
 })
 
-async function prepareLoginRespose(user) {
-    const accessToken = createJwt(user.email)
-    const refreshToken = jwt.sign(user.email, process.env.REFRESH_TOKEN_SECRET)
-
-    let rt = new RefreshToken({ token: refreshToken })
-    await rt.save()
-
-    return { email: user.email, accessToken: accessToken, refreshToken: refreshToken}
-}
-
 router.post('/refreshtoken', async (req, res) => {
     const reqRefreshToken = req.body.refreshToken
     if (reqRefreshToken == null) 
@@ -94,6 +84,16 @@ router.post('/refreshtoken', async (req, res) => {
       res.json({ accessToken: accessToken })
     })
   })
+  
+async function prepareLoginRespose(user) {
+    const accessToken = createJwt(user.email)
+    const refreshToken = jwt.sign(user.email, process.env.REFRESH_TOKEN_SECRET)
+
+    let rt = new RefreshToken({ token: refreshToken })
+    await rt.save()
+
+    return { email: user.email, accessToken: accessToken, refreshToken: refreshToken}
+}
 
 function createJwt(email) {
     return jwt.sign({email:email}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5m' })
