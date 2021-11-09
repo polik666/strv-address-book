@@ -1,0 +1,24 @@
+GET http://localhost:3000/account/echo
+###
+POST http://localhost:3000/account/register
+Content-Type: application/json
+
+{
+    "email": "pavel@localhost.local",
+    "password": "MyP4ssw0rd."
+}
+###
+POST http://localhost:3000/account/login
+Content-Type: application/json
+
+{
+    "email": "pavel@localhost.local",
+    "password": "MyP4ssw0rd."
+}
+###
+POST http://localhost:3000/account/refreshtoken
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.cGF2ZWxAbG9jYWxob3N0LmxvY2Fs.ITIkPSJOOcZ3t-p8BN6tHslGOAmu5ajK1nTSv2rCxCM"
+}
