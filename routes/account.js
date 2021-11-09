@@ -1,10 +1,11 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
-const router = express.Router()
-const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
-let refreshTokens = []
+const router = express.Router()
+
+const User = require('../models/user')
+const RefreshToken = require('../models/refresh-token')
 
 router.get('/echo', async (req, res) => {
     try {
@@ -48,8 +49,14 @@ router.post('/login', validateUserData, async (req, res) =>  {
     }
     try {
         if(await bcrypt.compare(req.body.password, user.password)) {
-            const jwt = createJwt(user.email)
-            res.json({ accessToken: jwt })
+            const accessToken = createJwt(user.email)
+            const refreshToken = jwt.sign(user.email, process.env.REFRESH_TOKEN_SECRET)
+
+            var rt = new RefreshToken({ token: refreshToken })
+            await rt.save()
+
+            res.json({ accessToken: accessToken, refreshToken: refreshToken})
+            return
         }
         else {
             res.send(401).send('Unknown user or password')
@@ -60,15 +67,21 @@ router.post('/login', validateUserData, async (req, res) =>  {
       }
 })
 
-router.post('/refreshtoken', (req, res) => {
-    const refreshToken = req.body.token
-    if (refreshToken == null) 
+router.post('/refreshtoken', async (req, res) => {
+    const reqRefreshToken = req.body.refreshToken
+    if (reqRefreshToken == null) 
         return res.sendStatus(401)
 
-    if (!refreshTokens.includes(refreshToken)) 
-        return res.sendStatus(403)
+    try {
+        if(!await RefreshToken.exists({token: reqRefreshToken}))
+            return res.sendStatus(403)
+    }
+    catch(err) {
+        console.error(err);
+        res.status(500).send()
+    }
 
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    jwt.verify(reqRefreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
       if (err) 
         return res.sendStatus(403)
 
