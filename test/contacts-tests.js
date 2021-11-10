@@ -38,7 +38,8 @@ describe('Contacts', () => {
   })
 
   it('Missing last name', function(done) {
-     chai.request(server).post(CREATE_PATH)
+    chai.request(server).post(CREATE_PATH)
+    .set({ 'Authorization': `Bearer ${accessToken}` })
     .send({ })
     .end(function(err, res) {
       expect(res).to.have.status(400)
