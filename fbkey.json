@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "strv-addressbook-knotek-pavel",
+  "private_key_id": "e6ca5c78eb24e8d90ff2e1eb3e03727e69790f7d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDKFs2utBGPmJFE\nKDUO3ngcbdUh7o7FLKFE4um1qr2EyJI+iZG49mClhpnfhuRFR9xRoik3CvotiCu1\nkI/vGKzfRrAgepseYbs/+R/GeLP8UgMxQCH/oVNhwjd9qZL9yXs15RD8lTC2/nCJ\nMgmomGawu3A6LaURVS4r1s52AiSGhTiqQrPIk1rI1q6PxVxLoc7BusUSaSwXiCgx\nBoXHxEsFsPZJGKt+6XPVpPT2kkEqsmuNoLwGIx171GPzvLXRu7KdmP/Ah/fijG3z\n6akPaRjVh0NbzPHyCzUmGm/6OQqGabeIKT8ZMjBjl9ROjtPM+I8Yb2QEAnVpdq0m\n43Kh058DAgMBAAECggEAUCQR5h2/tw/cT8iYHfDodfGya1Xk5VmJDL3ly6bNqGo3\n4LgCg3SlKA9EVynxvW29d9wUdyERzFurZcHR6pIBADxSnVaxzC8aqEh9quH0EnRd\nkrrpoKvT2rk/80P7qEwt4dYY0enCG1e0vhuLTAI/+wch/thaFREQEc+KKa841+Uo\nuJqa4w/w1HcNNXvhi7n9J1vwsM4/o07H/QbZOs7wtQ79ZVSxx9GNFM9I0FGokw2C\nLUh/5RA1AkCWYiJ/UBLNB/ju/D3GYqvRfPmh7EqbsTK5suzsXBZGttFKdlj/Fi9x\n5ozUl632NrSaOQQNIIo3NZO12nJaAVdeEQPbof3PpQKBgQD6EzEkluMp3jMaezfV\nC88MDchpwvjQXAEadtZH0YyKUFHpPBShmQCIps+Gc7y+B+augxKtaUzT7Sco72do\nwx4+JsvTUpr8QYb9iSOi8lT3zvAavE7SiNfU4zY7BqXP4Ih+jKrw0BvYnK2gsvJU\nDIlNPlcwm75Bgah5FbjUKRD3BwKBgQDO4I6lcaMSX0pTHknvuUKidcMLxyXtJkOu\nREJkr6AJNJk8dNSR3T+Q/JWn4dQ3z1R3QpDh32sDhfaaUxnYm66+7anRIbj30ouz\nJNdhfTSsi3/FQ2SKAkuGjD7M+NwwjgH2rSDdtU9lWU3szxIVZN1JIhrOjh+V2nHt\nooVMQlL9JQKBgGo5SMCgDzIznkV7XYXzlCksmZrDJOlsi1Nwcyjii+4cnA6UZLcX\nxLBHGxOjieK2fHhYWNCsT+Qdcmri9mv7pZcE58OF7SuFsg9z9105znnMvxS8NEcd\ntYBKWzjLZBde6tvGaL4NyCZEt0PxfxnQkWnsNyEAptowdx2n6nDEWN51AoGAIZVk\nssjqzx23BB1DpW3uuk7htfTDXGc8z3p3SL8V/MiUI7NXmsJPAmtupA1OFS1MKfwd\nZv2M8sp5iP36kSZczNPqIHAYBeshEJjnegUIWwZeXJifJqROvG3h+AZiQGOdP/1E\n+5jmZa6Eru/CoMR6A9hMf8GksQAARLKAbyvJKx0CgYEA9RnIad8IfpF8MXer8yb2\n+54pW+X2LNoTR6bnYx7HTnfQG/MEYg/3/NZbvV9AalAtEE/+uO9aZMHz81lG/9F6\np3M1xkoWqMxcXQzWcpSVIhlZrSET0fsXytaBQuElmC0J1c1k6A0cDcRt5HuLQMoV\niIng/vKygymYFqdPwl3u3+A=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fmxsc@strv-addressbook-knotek-pavel.iam.gserviceaccount.com",
+  "client_id": "101329896507143180512",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fmxsc%40strv-addressbook-knotek-pavel.iam.gserviceaccount.com"
+}
