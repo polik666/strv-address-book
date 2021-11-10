@@ -6,31 +6,32 @@ const router = express.Router()
 
 const User = require('../models/user')
 const RefreshToken = require('../models/refresh-token')
+const dataLayer = require('../data-layer/in-memory');
 
 router.get('/echo', async (req, res) => {
     try {
-        const allUsers = await User.find();
+        const allUsers = await dataLayer.getAllUsers()
         res.send(allUsers);
     }
     catch (err) {
-        console.log(err);
+        console.log(err)
         res.status(500).json({ message: err.message })
     }
 }) 
 
 router.post('/register', validateUserData, async (req, res) =>  {
     try {
-        if(await User.exists({email: req.body.email})) {
+        if(await dataLayer.userExists(req.body.email)) {
             return res.status(400).send('User already exists')
         }
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         const user = new User({ email: req.body.email, password: hashedPassword })
-        user.save();
+        dataLayer.createUser(user)
         const loginResponse = await prepareLoginRespose(user)
         res.json(loginResponse)
     } catch (err) {
-        console.error(err);    
+        console.error(err)
         res.status(500).send()
     }
 })
@@ -38,14 +39,15 @@ router.post('/register', validateUserData, async (req, res) =>  {
 router.post('/login', validateUserData, async (req, res) =>  {
     let user = null
     try {
-        user = await User.findOne(u => {email = req.body.email}).clone()
+        user = await dataLayer.getUserByEmail(req.body.email)
+        console.log('xxxx')
     } catch (err) {
-        console.error(err);    
+        console.error(err) 
         res.status(500).send()
     }
 
     if(!user) {
-        return res.status(401).send('Unknown user or password')
+        return res.status(401).send('Unknown user or password X')
     }
     try {
         if(await bcrypt.compare(req.body.password, user.password)) {
@@ -68,7 +70,7 @@ router.post('/refreshtoken', async (req, res) => {
         return res.sendStatus(401)
 
     try {
-        if(!await RefreshToken.exists({token: reqRefreshToken}))
+        if(!await dataLayer.refreshTokenExists(reqRefreshToken))
             return res.sendStatus(403)
     }
     catch(err) {
@@ -90,7 +92,7 @@ async function prepareLoginRespose(user) {
     const refreshToken = jwt.sign(user.email, process.env.REFRESH_TOKEN_SECRET)
 
     let rt = new RefreshToken({ token: refreshToken })
-    await rt.save()
+    await dataLayer.createRefreshToken(rt)
 
     return { email: user.email, accessToken: accessToken, refreshToken: refreshToken}
 }
