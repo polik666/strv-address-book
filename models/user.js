@@ -1,4 +1,5 @@
 class User {
+  id
   email
   password
   constructor(email, password) {

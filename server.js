@@ -4,11 +4,23 @@ const express = require('express')
 const app = express();
 
 if(process.env.NODE_ENV !== 'test'){
+    // initialize mongo
     const mongoose = require('mongoose')
     mongoose.connect(process.env.DATABASE_URL)
     const db = mongoose.connection
     db.on('error', (error) => console.error(error))
     db.once('open', () => console.log('Connected to database'))
+
+    // initialize firebase
+    const admin = require("firebase-admin");
+    const serviceAccount = require('./fbkey.json')
+    
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: "https://strv-addressbook-knotek-pavel-default-rtdb.europe-west1.firebasedatabase.app"
+    });
+
+    console.log('Firebase initialized')
 }
 else {
     console.log('Running in in-memory mode')

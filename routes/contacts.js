@@ -33,8 +33,8 @@ async function processContactData(req, res, next) {
     if(!req.body.lastName){
          return res.status(400).json({message: 'Missing required fields', fields: ['LastName']})
     }
-    const user = await dataLayer.getUserByEmail(req.user)
-    var contact = new Contact(req.body.lastName, req.body.firstName, req.body.phone, req.body.address, user.email)
+    const user = await dataLayer.getUserByEmail(req.user.email)
+    var contact = new Contact(req.body.lastName, req.body.firstName, req.body.phone, req.body.address, user.id                  )
     res.contact = contact;
     
     next()

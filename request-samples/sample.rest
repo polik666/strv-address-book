@@ -22,11 +22,12 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/contacts/create
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY1NjE0OTksImV4cCI6MTYzNjU2MTc5OX0.7oDhfFUoB_NhL_bg9CAYuGlhdnq4rC6BObr7mSaRLNg
+POST http://localhost:3000/contacts/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhdmVsQGxvY2FsaG9zdC5sb2NhbCIsImlhdCI6MTYzNjU3NDg5MiwiZXhwIjoxNjM2NTc1MTkyfQ.MhoasT3bRLGeAknqKeO534bM-zcdhbMKV-Ze5am0dVY
 Content-Type: application/json
 
 {
     "lastName": "Barel",
-    "firstName": "Karel"
+    "firstName": "Karel",
+    "address": "Doometshek Yikohvi oobookey"
 }

@@ -71,14 +71,14 @@ router.post('/refreshtoken', async (req, res) => {
       if (err) 
         return res.sendStatus(403)
 
-      const accessToken = createJwt(user.email)
+      const accessToken = createJwt(user)
       res.json({ accessToken: accessToken })
     })
   })
   
 async function prepareLoginRespose(user) {
-    const accessToken = createJwt(user.email)
-    const refreshToken = jwt.sign(user.email, process.env.REFRESH_TOKEN_SECRET)
+    const accessToken = createJwt(user)
+    const refreshToken = jwt.sign({id:user.id, email:user.email}, process.env.REFRESH_TOKEN_SECRET)
 
     let rt = new RefreshToken(refreshToken)
     await dataLayer.createRefreshToken(rt)
@@ -86,8 +86,8 @@ async function prepareLoginRespose(user) {
     return { email: user.email, accessToken: accessToken, refreshToken: refreshToken}
 }
 
-function createJwt(email) {
-    return jwt.sign({email:email}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_EXPIRATION || '10m' })
+function createJwt(user) {
+    return jwt.sign({id:user.id, email:user.email}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_EXPIRATION || '10m' })
 }
 
 function validateUserData(req, res, next) {
