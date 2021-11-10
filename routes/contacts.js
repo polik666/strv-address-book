@@ -5,8 +5,14 @@ const router = express.Router()
 const Contact = require('../models/contact')
 const dataLayer =  require('../data-layer/data-layer-provider').getDataLayer();
 
-router.get('/create', authenticateUser, processContactData, (req, res) => {
-    res.json(res.contact)
+router.post('/create', authenticateUser, processContactData, async (req, res) => {
+    try {
+        await dataLayer.createContact(res.contact)
+        res.json(res.contact)
+    } catch (err) {
+        console.error(err)
+        res.status(500).send()
+    }
 })
 
 function authenticateUser(req, res, next) {
