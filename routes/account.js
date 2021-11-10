@@ -38,11 +38,6 @@ router.post('/login', validateUserData, async (req, res) =>  {
         return res.status(401).send('Unknown user or password')
     }
 
-console.log('xxxx')
-        console.log(user)
-        console.log(user.email)
-        console.log(user.password)
-
     try {
         if(await bcrypt.compare(req.body.password, user.password)) {
             const loginResponse = await prepareLoginRespose(user)

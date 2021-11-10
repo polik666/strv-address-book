@@ -1,5 +1,6 @@
 configurable port
 configurable everything (DBs)
+configurable tests URL for requests
 tests
 swagger
 deployment
@@ -8,8 +9,28 @@ clean up
 remove console.logs
 add model validations (email format?) - as for the user, maybe i could load the object in the middleware
 add unit tests for model validations
+tests don't look like they finish they run. Missing DONE somewhere?
 ?Typescript
 
 
 
 ############### DONE ###############
+
+
+
+
+
+code snippet for delayed tests
+
+
+  it('Refresh token expired', function(done) {
+    this.timeout(10000);
+    setTimeout(function() {
+        chai.request(server).post('/account/refreshtoken')
+       .send({  })
+       .end(function(err, res) {
+          expect(res).to.have.status(403)
+          done()
+       })
+    }, 6000)
+  })
