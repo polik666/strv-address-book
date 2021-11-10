@@ -10,7 +10,7 @@ remove console.logs
 add model validations (email, phone number format?) - as for the user, maybe i could load the object in the middleware
 add unit tests for model validations
 tests don't look like they finish they run. Missing DONE somewhere?
-getting data from request and calling validation
+getting data from request and calling validation (just like the contacts stuff - but maybe find a library for this)
 ?Typescript
 
 
