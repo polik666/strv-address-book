@@ -2,12 +2,17 @@ require('dotenv').config()
 
 const express = require('express')
 const app = express();
-const mongoose = require('mongoose')
 
-// mongoose.connect(process.env.DATABASE_URL)
-// const db = mongoose.connection
-// db.on('error', (error) => console.error(error))
-// db.once('open', () => console.log('Connected to database'))
+if(process.env.NODE_ENV !== 'test'){
+    const mongoose = require('mongoose')
+    mongoose.connect(process.env.DATABASE_URL)
+    const db = mongoose.connection
+    db.on('error', (error) => console.error(error))
+    db.once('open', () => console.log('Connected to database'))
+}
+else {
+    console.log('Running in in-memory mode')
+}
 
 app.use(express.json())
 

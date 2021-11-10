@@ -6,6 +6,8 @@ deployment
 CI
 clean up
 remove console.logs
+add model validations (email format?) - as for the user, maybe i could load the object in the middleware
+add unit tests for model validations
 ?Typescript
 
 

@@ -1,9 +1,9 @@
 class User {
   email
-  width
-  constructor(email, width) {
+  password
+  constructor(email, password) {
     this.email = email
-    this.width = width
+    this.password = password
   }
 }
   

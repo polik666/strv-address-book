@@ -6,7 +6,7 @@ const router = express.Router()
 
 const User = require('../models/user')
 const RefreshToken = require('../models/refresh-token')
-const dataLayer = require('../data-layer/in-memory/in-memory');
+const dataLayer =  require('../data-layer/data-layer-provider').getDataLayer();
 
 router.post('/register', validateUserData, async (req, res) =>  {
     try {

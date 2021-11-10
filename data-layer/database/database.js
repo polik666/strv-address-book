@@ -1,25 +1,25 @@
-const schemaUser = require('./mongo-schemas/mongo-user')
-const schemaRefreshToken = require('./mongo-schemas/mongo-refresh-token')
+const SchemaUser = require('./mongo-schemas/mongo-user')
+const SchemaRefreshToken = require('./mongo-schemas/mongo-refresh-token')
 
 async function getUserByEmail(email) {
-    return await schemaUser.findOne(u => {email = email}).clone()
+    return await SchemaUser.findOne(u => {email = email}).clone()
 }
 
-async function userExists(email) {
-    await schemaUser.exists({email: email})
+async function userExists(m) {
+    return await SchemaUser.exists({email: m})
 }
 
 async function createUser(user) {
-    const u = new schemaUser(user)
-    u.save();
+    const u = new SchemaUser(user)
+    await u.save();
 }
 
 async function refreshTokenExists(token) {
-    return await schemaRefreshToken.exists({token: token})
+    return await SchemaRefreshToken.exists({token: token})
 }
 
 async function createRefreshToken(refreshToken) {
-    const rt = new schemaRefreshToken(refreshToken)
+    const rt = new SchemaRefreshToken(refreshToken)
     await rt.save()
 }
 
