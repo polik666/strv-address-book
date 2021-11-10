@@ -1,12 +1,11 @@
-const User = require('../models/user')
+const User = require('../../models/user')
+const RefreshToken = require('../../models/refresh-token')
 
 const users = []
 const refreshTokens = []
 const contacts = []
 
 async function getUserByEmail(email) {
-    console.log('yyyy')
-    console.log(email)
     return users.find(x => x.email === email);
 }
 

@@ -1,3 +1,41 @@
+const schemaUser = require('./mongo-schemas/mongo-user')
+const schemaRefreshToken = require('./mongo-schemas/mongo-refresh-token')
+
+async function getUserByEmail(email) {
+    return await schemaUser.findOne(u => {email = email}).clone()
+}
+
+async function userExists(email) {
+    await schemaUser.exists({email: email})
+}
+
+async function createUser(user) {
+    const u = new schemaUser(user)
+    u.save();
+}
+
+async function refreshTokenExists(token) {
+    return await schemaRefreshToken.exists({token: token})
+}
+
+async function createRefreshToken(refreshToken) {
+    const rt = new schemaRefreshToken(refreshToken)
+    await rt.save()
+}
+
+async function createContact(contact) {
+    throw new Error('Not implemented')
+}
+
+module.exports = {
+    getUserByEmail,
+    userExists,
+    createUser,
+    refreshTokenExists,
+    createRefreshToken,
+    createContact
+}
+
 // const express = require('express')
 // const bcrypt = require('bcrypt')
 // const jwt = require('jsonwebtoken')

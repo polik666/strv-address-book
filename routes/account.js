@@ -6,7 +6,7 @@ const router = express.Router()
 
 const User = require('../models/user')
 const RefreshToken = require('../models/refresh-token')
-const dataLayer = require('../data-layer/in-memory');
+const dataLayer = require('../data-layer/in-memory/in-memory');
 
 router.post('/register', validateUserData, async (req, res) =>  {
     try {
@@ -15,7 +15,7 @@ router.post('/register', validateUserData, async (req, res) =>  {
         }
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        const user = new User({ email: req.body.email, password: hashedPassword })
+        const user = new User(req.body.email, hashedPassword)
         dataLayer.createUser(user)
         const loginResponse = await prepareLoginRespose(user)
         res.json(loginResponse)
@@ -29,15 +29,20 @@ router.post('/login', validateUserData, async (req, res) =>  {
     let user = null
     try {
         user = await dataLayer.getUserByEmail(req.body.email)
-        console.log('xxxx')
     } catch (err) {
         console.error(err) 
         res.status(500).send()
     }
 
     if(!user) {
-        return res.status(401).send('Unknown user or password X')
+        return res.status(401).send('Unknown user or password')
     }
+
+console.log('xxxx')
+        console.log(user)
+        console.log(user.email)
+        console.log(user.password)
+
     try {
         if(await bcrypt.compare(req.body.password, user.password)) {
             const loginResponse = await prepareLoginRespose(user)
@@ -80,7 +85,7 @@ async function prepareLoginRespose(user) {
     const accessToken = createJwt(user.email)
     const refreshToken = jwt.sign(user.email, process.env.REFRESH_TOKEN_SECRET)
 
-    let rt = new RefreshToken({ token: refreshToken })
+    let rt = new RefreshToken(refreshToken)
     await dataLayer.createRefreshToken(rt)
 
     return { email: user.email, accessToken: accessToken, refreshToken: refreshToken}

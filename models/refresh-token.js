@@ -1,10 +1,8 @@
-const mongoose = require('mongoose')
-
-const refreshTokenSchema = new mongoose.Schema({
-    token: {
-      type: String,
-      required: true
-    }
-  })
+class RefreshToken {
+  token
+  constructor(token) {
+    this.token = token
+  }
+}
   
-  module.exports = mongoose.model('RefreshToken', refreshTokenSchema)
+module.exports = RefreshToken
