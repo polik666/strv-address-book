@@ -8,17 +8,6 @@ const User = require('../models/user')
 const RefreshToken = require('../models/refresh-token')
 const dataLayer = require('../data-layer/in-memory');
 
-router.get('/echo', async (req, res) => {
-    try {
-        const allUsers = await dataLayer.getAllUsers()
-        res.send(allUsers);
-    }
-    catch (err) {
-        console.log(err)
-        res.status(500).json({ message: err.message })
-    }
-}) 
-
 router.post('/register', validateUserData, async (req, res) =>  {
     try {
         if(await dataLayer.userExists(req.body.email)) {

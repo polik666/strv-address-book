@@ -4,10 +4,6 @@ const users = []
 const refreshTokens = []
 const contacts = []
 
-async function getAllUsers() {
-    return [...users];
-}
-
 async function getUserByEmail(email) {
     console.log('yyyy')
     console.log(email)
@@ -35,7 +31,6 @@ async function createContact(contact) {
 }
 
 module.exports = {
-    getAllUsers,
     getUserByEmail,
     userExists,
     createUser,
