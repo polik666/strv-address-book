@@ -1,5 +1,4 @@
 process.env.NODE_ENV = 'test'
-process.env.JWT_EXPIRATION = '5s'
 
 const chai = require('chai')
 const assert = chai.assert
@@ -10,23 +9,23 @@ const server = require('../server')
 
 chai.use(chaiHttp)
 
-const emailDog = 'dog@example.com'
-const emailCat = 'cat@example.com'
-const emailGiraffe = 'giraffe@example.com'
-const pwdSuperSecret = 'SuperSecretPassword'
+const EMAIL_DOG = 'dog@example.com'
+const EMAIL_CAT = 'cat@example.com'
+const EMAIL_GIRAFFE = 'giraffe@example.com'
+const PWD_SECRET = 'SuperSecretPassword'
 
 describe('Registration', () => {
   it('Missing email & password', function(done) { validateLoginParameters(done, '/account/register', undefined, undefined) })
-  it('Missing email', function(done) { validateLoginParameters(done, '/account/register', undefined, pwdSuperSecret) })
-  it('Missing password', function(done) { validateLoginParameters(done, '/account/register', emailDog, undefined) })
+  it('Missing email', function(done) { validateLoginParameters(done, '/account/register', undefined, PWD_SECRET) })
+  it('Missing password', function(done) { validateLoginParameters(done, '/account/register', EMAIL_DOG, undefined) })
 
   it('Successful registration', function(done) {
     chai.request(server).post('/account/register')
-    .send({ email: emailDog, password: pwdSuperSecret})
+    .send({ email: EMAIL_DOG, password: PWD_SECRET})
     .end(function(err, res) {
       expect(res).to.have.status(200)
       expect(res.body).not.to.be.undefined
-      expect(res.body.email).to.equal(emailDog)
+      expect(res.body.email).to.equal(EMAIL_DOG)
       expect(res.body.accessToken).not.to.be.undefined
       expect(res.body.refreshToken).not.to.be.undefined
       done()
@@ -35,7 +34,7 @@ describe('Registration', () => {
 
   it('Duplicate email', function(done) {
     chai.request(server).post('/account/register')
-    .send({ email: emailDog, password: pwdSuperSecret})
+    .send({ email: EMAIL_DOG, password: PWD_SECRET})
     .end(function(err, res) {
       expect(res).to.have.status(400)
       expect(res.text).not.to.be.undefined
@@ -47,21 +46,21 @@ describe('Registration', () => {
 
 describe('Login', () => {
   it('Missing email & password', function(done) { validateLoginParameters(done, '/account/login', undefined, undefined) })
-  it('Missing email', function(done) { validateLoginParameters(done, '/account/login', undefined, pwdSuperSecret) })
-  it('Missing password', function(done) { validateLoginParameters(done, '/account/login', emailDog, undefined) })
+  it('Missing email', function(done) { validateLoginParameters(done, '/account/login', undefined, PWD_SECRET) })
+  it('Missing password', function(done) { validateLoginParameters(done, '/account/login', EMAIL_DOG, undefined) })
 
   it('Successful login', function(done) {
     chai.request(server).post('/account/register')
-    .send({ email: emailCat, password: pwdSuperSecret})
+    .send({ email: EMAIL_CAT, password: PWD_SECRET})
     .end(function(err, res) {
       expect(res).to.have.status(200)
 
       chai.request(server).post('/account/login')
-       .send({ email: emailCat, password: pwdSuperSecret})
+       .send({ email: EMAIL_CAT, password: PWD_SECRET})
        .end(function(err, res) {
           expect(res).to.have.status(200)
           expect(res.body).not.to.be.undefined
-          expect(res.body.email).to.equal(emailCat)
+          expect(res.body.email).to.equal(EMAIL_CAT)
           expect(res.body.accessToken).not.to.be.undefined
           expect(res.body.refreshToken).not.to.be.undefined
           done()
@@ -75,7 +74,7 @@ describe('Refresh token', () => {
   let refreshToken = null
   before(function(done) {
       chai.request(server).post('/account/register')
-      .send({ email: emailGiraffe, password: pwdSuperSecret})
+      .send({ email: EMAIL_GIRAFFE, password: PWD_SECRET})
       .end(function(err, res) {
         expect(res).to.have.status(200)
         accessToken = res.body.accessToken

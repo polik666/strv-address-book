@@ -87,7 +87,7 @@ async function prepareLoginRespose(user) {
 }
 
 function createJwt(email) {
-    return jwt.sign({email:email}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5m' })
+    return jwt.sign({email:email}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_EXPIRATION || '10m' })
 }
 
 function validateUserData(req, res, next) {
