@@ -20,3 +20,13 @@ Content-Type: application/json
 {
     "refreshToken": "eyJhbGciOiJIUzI1NiJ9.cGF2ZWxAbG9jYWxob3N0LmxvY2Fs.ITIkPSJOOcZ3t-p8BN6tHslGOAmu5ajK1nTSv2rCxCM"
 }
+
+###
+GET http://localhost:3000/contacts/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY1NjA3NjMsImV4cCI6MTYzNjU2MTA2M30.u-d0RepIT1yh2Z8LDIbLfZd9406W2AeCAnic5dLV4F4
+Content-Type: application/json
+
+{
+    "lastName": "Barel",
+    "firstName": "Karel"
+}
