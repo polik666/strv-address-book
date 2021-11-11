@@ -1,3 +1,5 @@
+GET http://localhost:3000/account/echo
+###
 POST http://localhost:3000/account/register
 Content-Type: application/json
 
