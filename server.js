@@ -37,6 +37,6 @@ const contanctsRouter = require('./routes/contacts')
 app.use('/account', accountRouter)
 app.use('/contacts', contanctsRouter)
 
-app.listen(process.env.API_PORT, () => console.log(`Server started on ${process.env.API_PORT}`))
+app.listen(process.env.PORT, () => console.log(`Server started on ${process.env.PORT}`))
 
 module.exports = app
