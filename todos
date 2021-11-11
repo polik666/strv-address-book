@@ -1,5 +1,4 @@
-configurable port
-configurable everything (DBs)
+
 configurable tests URL for requests
 
 swagger
@@ -20,3 +19,5 @@ getting data from request and calling validation (just like the contacts stuff -
 add unit tests for model validations
 add model validations (email, phone number format?) - as for the user, maybe i could load the object in the middleware
 tests
+configurable port
+configurable everything (DBs)

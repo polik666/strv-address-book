@@ -1,4 +1,7 @@
-require('dotenv').config()
+
+if (process.env.NODE_ENV !== 'remote') {
+    require('dotenv').config();
+}
 
 const express = require('express')
 const app = express();
