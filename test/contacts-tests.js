@@ -44,7 +44,7 @@ describe('Contacts', () => {
     .send({ })
     .end(function(err, res) {
       expect(res).to.have.status(400)
-      expect(helper.containsValidationError(res, 'LastName', 'LastName is required')).to.be.true
+      expect(helper.containsValidationError(res, 'LastName', 'Last name is required')).to.be.true
       done()
     })
   })

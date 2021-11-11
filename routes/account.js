@@ -10,12 +10,12 @@ const dataLayer =  require('../data-layer/data-layer-provider').getDataLayer();
 
 router.post('/register', processUserData, async (req, res) =>  {
     try {
-        if(await dataLayer.userExists(res.user.email)) {
+        if(await dataLayer.userExists(req.user.email)) {
             return res.status(400).send('User already exists')
         }
 
-        const hashedPassword = await bcrypt.hash(res.user.password, 10)
-        const user = new User(res.user.email, hashedPassword)
+        const hashedPassword = await bcrypt.hash(req.user.password, 10)
+        const user = new User(req.user.email, hashedPassword)
         dataLayer.createUser(user)
         const loginResponse = await prepareLoginRespose(user)
         res.json(loginResponse)
@@ -28,7 +28,7 @@ router.post('/register', processUserData, async (req, res) =>  {
 router.post('/login', processUserData, async (req, res) =>  {
     let user = null
     try {
-        user = await dataLayer.getUserByEmail(res.user.email)
+        user = await dataLayer.getUserByEmail(req.user.email)
     } catch (err) {
         console.error(err) 
         res.status(500).send()
@@ -39,7 +39,7 @@ router.post('/login', processUserData, async (req, res) =>  {
     }
 
     try {
-        if(await bcrypt.compare(res.user.password, user.password)) {
+        if(await bcrypt.compare(req.user.password, user.password)) {
             const loginResponse = await prepareLoginRespose(user)
             res.json(loginResponse)
             return
@@ -98,7 +98,7 @@ function processUserData(req, res, next) {
         return res.status(400).json(errors)
     }
 
-    res.user = user
+    req.user = user
 
     next()
 }
