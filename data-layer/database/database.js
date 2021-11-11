@@ -28,7 +28,7 @@ async function createRefreshToken(refreshToken) {
 
 async function createContact(contact) {
     const db = getDatabase();
-    const ref = db.ref('contacts/' + contact.owner);
+    const ref = db.ref(`${process.env.DB_FIREBASE_DB_NAME}/contacts/${contact.owner}`);
     await ref.push(contact)
 }
 

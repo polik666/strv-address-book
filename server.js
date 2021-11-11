@@ -6,18 +6,18 @@ const app = express();
 if(process.env.NODE_ENV !== 'test'){
     // initialize mongo
     const mongoose = require('mongoose')
-    mongoose.connect(process.env.DATABASE_URL)
+    mongoose.connect(process.env.DB_MONGO_URL)
     const db = mongoose.connection
     db.on('error', (error) => console.error(error))
     db.once('open', () => console.log('Connected to database'))
 
     // initialize firebase
     const admin = require("firebase-admin");
-    const serviceAccount = require('./fbkey.json')
+    const serviceAccount = require(process.env.FIREBASE_CERT_PATH)
     
     admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
-        databaseURL: "https://strv-addressbook-knotek-pavel-default-rtdb.europe-west1.firebasedatabase.app"
+        databaseURL: process.env.DB_FIREBASE_URL
     });
 
     console.log('Firebase initialized')
@@ -34,6 +34,6 @@ const contanctsRouter = require('./routes/contacts')
 app.use('/account', accountRouter)
 app.use('/contacts', contanctsRouter)
 
-app.listen(3000, () => console.log('Server started '))
+app.listen(process.env.API_PORT, () => console.log(`Server started on ${process.env.API_PORT}`))
 
 module.exports = app
