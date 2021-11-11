@@ -3,12 +3,11 @@ configurable tests URL for requests
 
 swagger
 deployment
-CI
+
 
 clean up
 remove console.logs
 
-tests don't look like they finish they run. Missing DONE somewhere?
 Use multple databases for running tests, remove the InMemory storage
 
 ############### DONE ###############
@@ -21,3 +20,5 @@ add model validations (email, phone number format?) - as for the user, maybe i c
 tests
 configurable port
 configurable everything (DBs)
+tests don't look like they finish they run. Missing DONE somewhere?
+CI

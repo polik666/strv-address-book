@@ -8,6 +8,10 @@ const User = require('../models/user')
 const RefreshToken = require('../models/refresh-token')
 const dataLayer =  require('../data-layer/data-layer-provider').getDataLayer();
 
+router.get('/echo', (req, res) => {
+    res.send('Hello worlds')
+})
+
 router.post('/register', processUserData, async (req, res) =>  {
     try {
         if(await dataLayer.userExists(req.user.email)) {
