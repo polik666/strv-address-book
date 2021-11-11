@@ -4,6 +4,7 @@ const chai = require('chai')
 const assert = chai.assert
 const expect = chai.expect
 const chaiHttp = require('chai-http')
+const helper = require('./test-helper')
 
 const server = require('../server')
 
@@ -110,13 +111,12 @@ function validateLoginParameters(done, path, email, password) {
     .send({ })
     .end(function(err, res) {
       expect(res).to.have.status(400)
-      expect(res.body.message).not.to.be.undefined
-      expect(res.body.fields).not.to.be.undefined
-      expect(res.body.message).to.be.equal('Missing required fields')
-      if(!email)
-        expect(res.body.fields).to.contain('Email')
+      if(!email) 
+        expect(helper.containsValidationError(res, 'Email', 'Email is required')).to.be.true
       if(!password)
-        expect(res.body.fields).to.contain('Password')
+        expect(helper.containsValidationError(res, 'Password', 'Password is required')).to.be.true
       done()
     })
 }
+
+

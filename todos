@@ -12,6 +12,7 @@ add unit tests for model validations
 tests don't look like they finish they run. Missing DONE somewhere?
 getting data from request and calling validation (just like the contacts stuff - but maybe find a library for this)
 ?Typescript
+Use multple databases for running tests, remove the InMemory storage
 
 
 

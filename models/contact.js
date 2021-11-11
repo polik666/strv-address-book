@@ -1,3 +1,5 @@
+const validator = require('validator')
+
 class Contact {
     lastName
     firstName
@@ -11,6 +13,14 @@ class Contact {
         this.phone = phone || null
         this.address = address || null
         this.owner = owner || null
+    }
+
+    validate() {
+        const errors = []
+        if (!this.lastName) {
+            errors.push({field: 'LastName', message: 'Last name is required'})
+        }
+        return errors
     }
 }
 

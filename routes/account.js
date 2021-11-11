@@ -8,14 +8,14 @@ const User = require('../models/user')
 const RefreshToken = require('../models/refresh-token')
 const dataLayer =  require('../data-layer/data-layer-provider').getDataLayer();
 
-router.post('/register', validateUserData, async (req, res) =>  {
+router.post('/register', processUserData, async (req, res) =>  {
     try {
-        if(await dataLayer.userExists(req.body.email)) {
+        if(await dataLayer.userExists(res.user.email)) {
             return res.status(400).send('User already exists')
         }
 
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        const user = new User(req.body.email, hashedPassword)
+        const hashedPassword = await bcrypt.hash(res.user.password, 10)
+        const user = new User(res.user.email, hashedPassword)
         dataLayer.createUser(user)
         const loginResponse = await prepareLoginRespose(user)
         res.json(loginResponse)
@@ -25,10 +25,10 @@ router.post('/register', validateUserData, async (req, res) =>  {
     }
 })
 
-router.post('/login', validateUserData, async (req, res) =>  {
+router.post('/login', processUserData, async (req, res) =>  {
     let user = null
     try {
-        user = await dataLayer.getUserByEmail(req.body.email)
+        user = await dataLayer.getUserByEmail(res.user.email)
     } catch (err) {
         console.error(err) 
         res.status(500).send()
@@ -39,7 +39,7 @@ router.post('/login', validateUserData, async (req, res) =>  {
     }
 
     try {
-        if(await bcrypt.compare(req.body.password, user.password)) {
+        if(await bcrypt.compare(res.user.password, user.password)) {
             const loginResponse = await prepareLoginRespose(user)
             res.json(loginResponse)
             return
@@ -90,18 +90,16 @@ function createJwt(user) {
     return jwt.sign({id:user.id, email:user.email}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_EXPIRATION || '10m' })
 }
 
-function validateUserData(req, res, next) {
-    const errors = []
-    if(!req.body.email){
-        errors.push('Email')
-    }
-    if(!req.body.password) {
-        errors.push('Password')
+function processUserData(req, res, next) {
+    const user = new User(req.body.email, req.body.password)
+    var errors = user.validate()
+
+    if(errors.length != 0) {
+        return res.status(400).json(errors)
     }
 
-    if(errors.length > 0) {
-        return res.status(400).json({message: 'Missing required fields', fields: errors})
-    }
+    res.user = user
+
     next()
 }
 

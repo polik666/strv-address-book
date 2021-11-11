@@ -30,11 +30,16 @@ function authenticateUser(req, res, next) {
 }
 
 async function processContactData(req, res, next) {
-    if(!req.body.lastName){
-         return res.status(400).json({message: 'Missing required fields', fields: ['LastName']})
+    const contact = new Contact(req.body.lastName, req.body.firstName, req.body.phone, req.body.address, null)
+
+    var errors = contact.validate()
+
+    if(errors.length != 0) {
+        return res.status(400).json(errors)
     }
+    
     const user = await dataLayer.getUserByEmail(req.user.email)
-    var contact = new Contact(req.body.lastName, req.body.firstName, req.body.phone, req.body.address, user.id                  )
+    contact.owner = user.id
     res.contact = contact;
     
     next()
