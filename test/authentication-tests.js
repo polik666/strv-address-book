@@ -91,6 +91,8 @@ describe('Refresh token', () => {
   })
 
   it('Successful refresh', function(done) {
+    setTimeout(function() {
+      // we need to wait a second to generate a new token
       chai.request(server).post('/account/refreshtoken')
        .send({ refreshToken: refreshToken })
        .end(function(err, res) {
@@ -100,6 +102,7 @@ describe('Refresh token', () => {
           expect(res.body.accessToken).not.to.equal(accessToken)
           done()
        })
+      }, 1000)
     })
 
   it('Refresh token not provided', function(done) {

@@ -1,20 +1,16 @@
 configurable port
 configurable everything (DBs)
 configurable tests URL for requests
-tests
+
 swagger
 deployment
 CI
+
 clean up
 remove console.logs
 
-
 tests don't look like they finish they run. Missing DONE somewhere?
-
-?Typescript
 Use multple databases for running tests, remove the InMemory storage
-
-
 
 ############### DONE ###############
 
@@ -23,3 +19,4 @@ contacts
 getting data from request and calling validation (just like the contacts stuff - but maybe find a library for this)
 add unit tests for model validations
 add model validations (email, phone number format?) - as for the user, maybe i could load the object in the middleware
+tests
