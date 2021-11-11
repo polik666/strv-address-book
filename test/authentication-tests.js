@@ -19,6 +19,9 @@ describe('Registration', () => {
   it('Missing email & password', function(done) { validateLoginParameters(done, '/account/register', undefined, undefined) })
   it('Missing email', function(done) { validateLoginParameters(done, '/account/register', undefined, PWD_SECRET) })
   it('Missing password', function(done) { validateLoginParameters(done, '/account/register', EMAIL_DOG, undefined) })
+  it('Incorrect mail format 1', function(done) { validateLoginParameters(done, '/account/register', 'xxxx', PWD_SECRET, true) })
+  it('Incorrect mail format 2', function(done) { validateLoginParameters(done, '/account/register', 'yyy@yyy', PWD_SECRET, true) })
+  it('Incorrect mail format 3', function(done) { validateLoginParameters(done, '/account/register', '.3', PWD_SECRET, true) })
 
   it('Successful registration', function(done) {
     chai.request(server).post('/account/register')
@@ -46,9 +49,12 @@ describe('Registration', () => {
 })
 
 describe('Login', () => {
-  it('Missing email & password', function(done) { validateLoginParameters(done, '/account/login', undefined, undefined) })
-  it('Missing email', function(done) { validateLoginParameters(done, '/account/login', undefined, PWD_SECRET) })
-  it('Missing password', function(done) { validateLoginParameters(done, '/account/login', EMAIL_DOG, undefined) })
+  it('Missing email & password', function(done) { validateLoginParameters(done, '/account/login', undefined, undefined, false) })
+  it('Missing email', function(done) { validateLoginParameters(done, '/account/login', undefined, PWD_SECRET, false) })
+  it('Missing password', function(done) { validateLoginParameters(done, '/account/login', EMAIL_DOG, undefined, false) })
+  it('Incorrect mail format 1', function(done) { validateLoginParameters(done, '/account/login', 'xxxx', PWD_SECRET, true) })
+  it('Incorrect mail format 2', function(done) { validateLoginParameters(done, '/account/login', 'yyy@yyy', PWD_SECRET, true) })
+  it('Incorrect mail format 3', function(done) { validateLoginParameters(done, '/account/login', '.3', PWD_SECRET, true) })
 
   it('Successful login', function(done) {
     chai.request(server).post('/account/register')
@@ -106,13 +112,22 @@ describe('Refresh token', () => {
   })
 })
 
-function validateLoginParameters(done, path, email, password) {
-    chai.request(server).post(path)
-    .send({ })
+function validateLoginParameters(done, path, email, password, incorrectMailFormat) {
+  const data = {}
+  if(email)
+    data['email'] = email
+
+  if(password)
+    data['password'] = email
+  
+  chai.request(server).post(path)
+    .send(data)
     .end(function(err, res) {
       expect(res).to.have.status(400)
       if(!email) 
         expect(helper.containsValidationError(res, 'Email', 'Email is required')).to.be.true
+      if(incorrectMailFormat)
+        expect(helper.containsValidationError(res, 'Email', 'Email is not in correct format')).to.be.true
       if(!password)
         expect(helper.containsValidationError(res, 'Password', 'Password is required')).to.be.true
       done()

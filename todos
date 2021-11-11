@@ -7,10 +7,10 @@ deployment
 CI
 clean up
 remove console.logs
-add model validations (email, phone number format?) - as for the user, maybe i could load the object in the middleware
-add unit tests for model validations
+
+
 tests don't look like they finish they run. Missing DONE somewhere?
-getting data from request and calling validation (just like the contacts stuff - but maybe find a library for this)
+
 ?Typescript
 Use multple databases for running tests, remove the InMemory storage
 
@@ -20,3 +20,6 @@ Use multple databases for running tests, remove the InMemory storage
 
 Firebase
 contacts
+getting data from request and calling validation (just like the contacts stuff - but maybe find a library for this)
+add unit tests for model validations
+add model validations (email, phone number format?) - as for the user, maybe i could load the object in the middleware
