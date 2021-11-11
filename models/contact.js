@@ -6,11 +6,11 @@ class Contact {
     owner
 
     constructor(lastName, firstName, phone, address, owner) {
-        this.lastName = lastName
-        this.firstName = firstName
-        this.phone = phone
-        this.address = address
-        this.owner = owner
+        this.lastName = lastName || null
+        this.firstName = firstName || null
+        this.phone = phone || null
+        this.address = address || null
+        this.owner = owner || null
     }
 }
 

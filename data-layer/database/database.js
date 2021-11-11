@@ -3,7 +3,7 @@ const SchemaRefreshToken = require('./mongo-schemas/mongo-refresh-token')
 const { getDatabase } = require('firebase-admin/database')
 
 async function getUserByEmail(email) {
-    return await SchemaUser.findOne(u => {email = email}).clone()
+    return await SchemaUser.findOne({email: email}).clone()
 }
 
 async function userExists(m) {
@@ -28,8 +28,8 @@ async function createRefreshToken(refreshToken) {
 
 async function createContact(contact) {
     const db = getDatabase();
-    const ref = db.ref('contacts');
-    await ref.push(JSON.stringify(contact))
+    const ref = db.ref('contacts/' + contact.owner);
+    await ref.push(contact)
 }
 
 module.exports = {

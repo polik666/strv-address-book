@@ -1,5 +1,3 @@
-contacts
-Firebase
 configurable port
 configurable everything (DBs)
 configurable tests URL for requests
@@ -18,3 +16,6 @@ getting data from request and calling validation (just like the contacts stuff -
 
 
 ############### DONE ###############
+
+Firebase
+contacts

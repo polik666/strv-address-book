@@ -2,7 +2,7 @@ POST http://localhost:3000/account/register
 Content-Type: application/json
 
 {
-    "email": "pavel@localhost.local",
+    "email": "pavelxxx@localhost.local",
     "password": "MyP4ssw0rd."
 }
 ###
@@ -18,16 +18,16 @@ POST http://localhost:3000/account/refreshtoken
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.cGF2ZWxAbG9jYWxob3N0LmxvY2Fs.ITIkPSJOOcZ3t-p8BN6tHslGOAmu5ajK1nTSv2rCxCM"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjM2NTc3NDQ1fQ.KNOiBRsXIP629aJjdlB-9bf8rvCaKLUonxUtTjQHoKQ"
 }
 
 ###
 POST http://localhost:3000/contacts/create
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhdmVsQGxvY2FsaG9zdC5sb2NhbCIsImlhdCI6MTYzNjU3NDg5MiwiZXhwIjoxNjM2NTc1MTkyfQ.MhoasT3bRLGeAknqKeO534bM-zcdhbMKV-Ze5am0dVY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjM2NjMzNDQ4LCJleHAiOjE2MzY2MzM3NDh9.WdkxIESlgAk1A5WIPHaDtlw57tUZLk1bhZOgS2pZWnY
 Content-Type: application/json
 
 {
-    "lastName": "Barel",
-    "firstName": "Karel",
+    "lastName": "Hugo",
+    "firstName": "Morce",
     "address": "Doometshek Yikohvi oobookey"
 }

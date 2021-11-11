@@ -69,7 +69,7 @@ describe('Contacts', () => {
 
         setTimeout(function() {
           // try to create a contact after the token is expired
-          createContact(done, accessToken, false)
+          createContact(null, accessToken, false)
 
           // refresh the token
           chai.request(server).post('/account/refreshtoken')
@@ -81,9 +81,7 @@ describe('Contacts', () => {
                expect(newAccessToken).not.to.be.equal(accessToken)
 
                // try creating the contact
-               createContact(done, newAccessToken, true)             
-
-               done()
+               createContact(done, newAccessToken, true)
             })
         }, 6000)
     })
@@ -110,6 +108,8 @@ function createContact(done, accessToken, shouldBeOk) {
       else {
         expect(res).to.have.status(403)
       }
-      done()
+
+      if(done)
+        done()
     })
 }
