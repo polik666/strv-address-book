@@ -16,7 +16,7 @@ router.post('/register', processUserData, async (req, res) =>  {
 
         const hashedPassword = await bcrypt.hash(req.user.password, 10)
         const user = new User(req.user.email, hashedPassword)
-        dataLayer.createUser(user)
+        await dataLayer.createUser(user)
         const loginResponse = await prepareLoginRespose(user)
         res.json(loginResponse)
     } catch (err) {

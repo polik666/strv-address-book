@@ -1,12 +1,8 @@
-
-configurable tests URL for requests
-
 swagger
-deployment
-
 
 clean up
 remove console.logs
+remove 500?
 
 Use multple databases for running tests, remove the InMemory storage
 
@@ -22,3 +18,4 @@ configurable port
 configurable everything (DBs)
 tests don't look like they finish they run. Missing DONE somewhere?
 CI
+deployment

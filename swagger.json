@@ -1,0 +1,83 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Address book API made by Pavel Knotek for STRV",
+    "version": "1.0.0",
+    "title": "Address book",
+    "contact": {
+      "email": "strv-addressbook-knotek-pavel@seznam.cz"
+    }
+  },
+  "host": "strv-addressbook-knotek-pavel.herokuapp.com/petstore.swagger.io",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/account/register": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Registers a new user",
+        "description": "Registers a new user and returns access and refresh tokens",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/userData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User's email, access and refresh tokens",
+            "schema": {
+              "$ref": "#/definitions/userDataResult"
+            }
+          },
+          "400": {
+            "description": "Invalid input or user already exists"
+          }
+        }
+      }
+    } 
+  },
+
+  
+  "definitions": {
+    "userData": {
+        "type": "object",
+        "properties": {
+            "email": {
+                "type": "string",
+                "required": true
+            },
+            "password": {
+                "type": "string",
+                "required": true
+            }
+        }
+    },
+    "userDataResult": {
+        "type": "object",
+        "properties": {
+            "email": {
+                "type": "string"
+            },
+            "accessToken": {
+                "type": "string"
+            },
+            "refreshToken": {
+                "type": "string"
+            }
+        }
+    }
+    }
+}
