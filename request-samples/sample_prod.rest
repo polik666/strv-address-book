@@ -1,0 +1,33 @@
+POST https://strv-addressbook-knotek-pavel.herokuapp.com/account/register
+Content-Type: application/json
+
+{
+    "email": "pavel@localhost.local",
+    "password": "MyP4ssw0rd."
+}
+###
+POST https://strv-addressbook-knotek-pavel.herokuapp.com/account/login
+Content-Type: application/json
+
+{
+    "email": "pavel@localhost.local",
+    "password": "MyP4ssw0rd."
+}
+###
+POST https://strv-addressbook-knotek-pavel.herokuapp.com/account/refreshtoken
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjM2NTc3NDQ1fQ.KNOiBRsXIP629aJjdlB-9bf8rvCaKLUonxUtTjQHoKQ"
+}
+
+###
+POST https://strv-addressbook-knotek-pavel.herokuapp.com/contacts/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhdmVsQGxvY2FsaG9zdC5sb2NhbCIsImlhdCI6MTYzNjY0MzI0MywiZXhwIjoxNjM2NjQzNTQzfQ.qJMjOvkgBf8GoouV6AC1eElpqzU4ZzFuaSgVarS3dWU
+Content-Type: application/json
+
+{
+    "lastName": "Oskar",
+    "firstName": "Morce",
+    "address": "Doometshek Yikohvi oobookey"
+}
