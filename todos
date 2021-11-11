@@ -4,6 +4,8 @@ clean up
 remove console.logs
 remove 500?
 
+move middlewares to a separate file?
+
 Use multple databases for running tests, remove the InMemory storage
 
 ############### DONE ###############

@@ -8,7 +8,7 @@
       "email": "strv-addressbook-knotek-pavel@seznam.cz"
     }
   },
-  "host": "strv-addressbook-knotek-pavel.herokuapp.com/petstore.swagger.io",
+  "host": "strv-addressbook-knotek-pavel.herokuapp.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -37,13 +37,87 @@
         ],
         "responses": {
           "200": {
-            "description": "User's email, access and refresh tokens",
+            "description": "Succesful registration",
             "schema": {
               "$ref": "#/definitions/userDataResult"
             }
           },
           "400": {
             "description": "Invalid input or user already exists"
+          }
+        }
+      }
+    } ,
+    "/account/login": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Logs in a user",
+        "description": "Logs in a user and returns access and refresh tokens",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/userData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "schema": {
+              "$ref": "#/definitions/userDataResult"
+            }
+          },
+          "400": {
+            "description": "Invalid input or user already exists"
+          },
+          "401": {
+              "description": "Unknown user or password"
+          }
+        }
+      }
+    } ,
+    "/account/refreshtoken": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Refreshes an expired access token",
+        "description": "Refreshes an expired access token and returns a new one",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/refreshToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful refresh",
+            "schema": {
+              "$ref": "#/definitions/refreshTokenResult"
+            }
+          },
+          "401": {
+            "description": "Refresh token not provided"
+          },
+          "403": {
+              "description": "Invalid or unknown refresh token"
           }
         }
       }
@@ -57,11 +131,15 @@
         "properties": {
             "email": {
                 "type": "string",
-                "required": true
+                "required": true,
+                "example": "mail@example.com",
+                "description": "A valid email address"
             },
             "password": {
                 "type": "string",
-                "required": true
+                "required": true,
+                "example": "Secr3tPassW0rd.",
+                "description": "A password (no special limitations)"
             }
         }
     },
@@ -69,15 +147,41 @@
         "type": "object",
         "properties": {
             "email": {
-                "type": "string"
+                "type": "string",
+                "example": "mail@example.com",
+                "description": "A valid email address"
             },
             "accessToken": {
-                "type": "string"
+                "type": "string",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0L2xvY2FsIiwiaWF0IjoxNjsdNjYyNTE4LCJleHAiOjE2MzY2NjI4MTh9.CE-Ms608OyeeWd3dNxNyGf69omPceekoQoPpYkk1szY",
+                "description": "An access token used for authentication requests"
             },
             "refreshToken": {
-                "type": "string"
+                "type": "string",
+                "example": "eyJhbGciO2JDUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjsNjYyNTE4fQ.5IVT-on_FcnW0Lt2i6ddpjzHrc3dIpoYUzt0qyJA8fo",
+                "description": "A refresh token used for refreshing expired access tokens"
+            }
+        }
+    },
+    "refreshToken": {
+        "type": "object",
+        "properties": {
+            "refreshToken": {
+                "type": "string",
+                "example": "eyJhbGciO2JDUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjsNjYyNTE4fQ.5IVT-on_FcnW0Lt2i6ddpjzHrc3dIpoYUzt0qyJA8fo",
+                "description": "A refresh token provided by API after login or registration"
+            }
+        }
+    },
+    "refreshTokenResult": {
+        "type": "object",
+        "properties": {
+            "accessToken": {
+                "type": "string",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0L2xvY2FsIiwiaWF0IjoxNjsdNjYyNTE4LCJleHAiOjE2MzY2NjI4MTh9.CE-Ms608OyeeWd3dNxNyGf69omPceekoQoPpYkk1szY",
+                "description": "A refreshed access token"
             }
         }
     }
-    }
+  }
 }
