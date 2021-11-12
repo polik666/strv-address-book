@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const User = require("../models/user")
 const RefreshToken = require("../models/refresh-token")
-const dataLayer = require("../data-layer/data-layer-provider").getDataLayer()
+const dataLayer = require("../data-layer/data-access-provider")
 
 router.post("/register", middleware.processUserData, async (req, res) => {
     if (await dataLayer.userExists(req.user.email)) {

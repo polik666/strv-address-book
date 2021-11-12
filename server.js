@@ -5,29 +5,25 @@ if (process.env.NODE_ENV !== "remote") {
 const express = require("express")
 const app = express()
 
-if (process.env.NODE_ENV !== "test") {
-    // initialize mongo
-    const mongoose = require("mongoose")
-    mongoose.connect(process.env.DB_MONGO_URL)
-    const db = mongoose.connection
-    db.on("error", (error) => console.error(error))
-    db.once("open", () => console.log("Connected to database"))
+// initialize mongo
+const mongoose = require("mongoose")
+mongoose.connect(process.env.DB_MONGO_URL)
+const db = mongoose.connection
+db.on("error", (error) => console.error(error))
+db.once("open", () => console.log("Connected to database"))
 
-    // initialize firebase
-    const admin = require("firebase-admin")
-    const serviceAccount = require(process.env.FIREBASE_CERT_PATH)
+// initialize firebase
+const admin = require("firebase-admin")
+const serviceAccount = require(process.env.FIREBASE_CERT_PATH)
 
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        databaseURL: process.env.DB_FIREBASE_URL,
-    })
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: process.env.DB_FIREBASE_URL,
+})
 
-    console.log("Firebase initialized")
+console.log("Firebase initialized")
 
-    require("./utils/swagger-helper").initializeSwaggger(app)
-} else {
-    console.log("Running in in-memory mode")
-}
+require("./utils/swagger-helper").initializeSwaggger(app)
 
 app.use(express.json())
 

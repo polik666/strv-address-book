@@ -1,5 +1,3 @@
-process.env.NODE_ENV = "test"
-
 const chai = require("chai")
 const assert = chai.assert
 const expect = chai.expect
@@ -10,10 +8,10 @@ const server = require("../server")
 
 chai.use(chaiHttp)
 
-const EMAIL_DOG = "dog@example.com"
-const EMAIL_CAT = "cat@example.com"
-const EMAIL_GIRAFFE = "giraffe@example.com"
-const PWD_SECRET = "SuperSecretPassword"
+const EMAIL_DOG = helper.generateMailAddress()
+const EMAIL_CAT = helper.generateMailAddress()
+const EMAIL_GIRAFFE = helper.generateMailAddress()
+const PWD_SECRET = helper.generateMailAddress()
 
 describe("Registration", () => {
     it("Missing email & password", function (done) {

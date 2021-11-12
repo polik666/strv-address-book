@@ -1,7 +1,7 @@
 const User = require("../models/user")
 const Contact = require("../models/contact")
 const jwt = require("jsonwebtoken")
-const dataLayer = require("../data-layer/data-layer-provider").getDataLayer()
+const dataLayer = require("../data-layer/data-access-provider")
 
 function processUserData(req, res, next) {
     const user = new User(req.body.email, req.body.password)

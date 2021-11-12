@@ -1,5 +1,3 @@
-process.env.NODE_ENV = "test"
-
 const chai = require("chai")
 const assert = chai.assert
 const expect = chai.expect
@@ -11,8 +9,8 @@ const server = require("../server")
 chai.use(chaiHttp)
 
 const CREATE_PATH = "/contacts/create"
-const EMAIL_TORTOISE = "tortoise@example.com"
-const EMAIL_TURTLE = "turtle@example.com"
+const EMAIL_TORTOISE = helper.generateMailAddress()
+const EMAIL_TURTLE = helper.generateMailAddress()
 const PWD_SECRET = "SuperSecretPassword"
 
 describe("Contacts", () => {
