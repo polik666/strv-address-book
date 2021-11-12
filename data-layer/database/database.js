@@ -1,24 +1,24 @@
-const SchemaUser = require('./mongo-schemas/mongo-user')
-const SchemaRefreshToken = require('./mongo-schemas/mongo-refresh-token')
-const { getDatabase } = require('firebase-admin/database')
+const SchemaUser = require("./mongo-schemas/mongo-user")
+const SchemaRefreshToken = require("./mongo-schemas/mongo-refresh-token")
+const { getDatabase } = require("firebase-admin/database")
 
 async function getUserByEmail(email) {
-    return await SchemaUser.findOne({email: email}).clone()
+    return await SchemaUser.findOne({ email: email }).clone()
 }
 
 async function userExists(m) {
-    return await SchemaUser.exists({email: m})
+    return await SchemaUser.exists({ email: m })
 }
 
 async function createUser(user) {
     const u = new SchemaUser(user)
-    await u.save();
-    user.id = u._id;
-    return user;
+    await u.save()
+    user.id = u._id
+    return user
 }
 
 async function refreshTokenExists(token) {
-    return await SchemaRefreshToken.exists({token: token})
+    return await SchemaRefreshToken.exists({ token: token })
 }
 
 async function createRefreshToken(refreshToken) {
@@ -27,8 +27,8 @@ async function createRefreshToken(refreshToken) {
 }
 
 async function createContact(contact) {
-    const db = getDatabase();
-    const ref = db.ref(`${process.env.DB_FIREBASE_DB_NAME}/contacts/${contact.owner}`);
+    const db = getDatabase()
+    const ref = db.ref(`${process.env.DB_FIREBASE_DB_NAME}/contacts/${contact.owner}`)
     await ref.push(contact)
 }
 
@@ -38,5 +38,5 @@ module.exports = {
     createUser,
     refreshTokenExists,
     createRefreshToken,
-    createContact
+    createContact,
 }

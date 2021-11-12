@@ -1,4 +1,4 @@
-const validator = require('validator')
+const validator = require("validator")
 
 class Contact {
     lastName
@@ -18,7 +18,7 @@ class Contact {
     validate() {
         const errors = []
         if (!this.lastName) {
-            errors.push({field: 'LastName', message: 'Last name is required'})
+            errors.push({ field: "LastName", message: "Last name is required" })
         }
         return errors
     }

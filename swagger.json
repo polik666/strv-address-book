@@ -1,290 +1,264 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "description": "Address book API made by Pavel Knotek for STRV",
-    "version": "1.0.0",
-    "title": "Address book",
-    "contact": {
-      "email": "strv-addressbook-knotek-pavel@seznam.cz"
-    }
-  },
-  "host": "strv-addressbook-knotek-pavel.herokuapp.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "paths": {
-    "/account/register": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "summary": "Registers a new user",
-        "description": "Registers a new user and returns access and refresh tokens",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/userData"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Succesful registration",
-            "schema": {
-              "$ref": "#/definitions/userDataResult"
-            }
-          },
-          "400": {
-            "description": "Invalid input or user already exists"
-          }
+    "swagger": "2.0",
+    "info": {
+        "description": "Address book API made by Pavel Knotek for STRV",
+        "version": "1.0.0",
+        "title": "Address book",
+        "contact": {
+            "email": "strv-addressbook-knotek-pavel@seznam.cz"
         }
-      }
     },
-    "/account/login": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "summary": "Logs in a user",
-        "description": "Logs in a user and returns access and refresh tokens",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/userData"
+    "host": "strv-addressbook-knotek-pavel.herokuapp.com",
+    "basePath": "/",
+    "schemes": ["https"],
+    "paths": {
+        "/account/register": {
+            "post": {
+                "tags": ["Account"],
+                "summary": "Registers a new user",
+                "description": "Registers a new user and returns access and refresh tokens",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful registration",
+                        "schema": {
+                            "$ref": "#/definitions/userDataResult"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input or user already exists"
+                    }
+                }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful login",
-            "schema": {
-              "$ref": "#/definitions/userDataResult"
+        },
+        "/account/login": {
+            "post": {
+                "tags": ["Account"],
+                "summary": "Logs in a user",
+                "description": "Logs in a user and returns access and refresh tokens",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/userData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "schema": {
+                            "$ref": "#/definitions/userDataResult"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input or user already exists"
+                    },
+                    "401": {
+                        "description": "Unknown user or password"
+                    }
+                }
             }
-          },
-          "400": {
-            "description": "Invalid input or user already exists"
-          },
-          "401": {
-              "description": "Unknown user or password"
-          }
-        }
-      }
-    } ,
-    "/account/refreshtoken": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "summary": "Refreshes an expired access token",
-        "description": "Refreshes an expired access token and returns a new one",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/refreshToken"
+        },
+        "/account/refreshtoken": {
+            "post": {
+                "tags": ["Account"],
+                "summary": "Refreshes an expired access token",
+                "description": "Refreshes an expired access token and returns a new one",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/refreshToken"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful refresh",
+                        "schema": {
+                            "$ref": "#/definitions/refreshTokenResult"
+                        }
+                    },
+                    "401": {
+                        "description": "Refresh token not provided"
+                    },
+                    "403": {
+                        "description": "Invalid or unknown refresh token"
+                    }
+                }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful refresh",
-            "schema": {
-              "$ref": "#/definitions/refreshTokenResult"
-            }
-          },
-          "401": {
-            "description": "Refresh token not provided"
-          },
-          "403": {
-              "description": "Invalid or unknown refresh token"
-          }
-        }
-      }
-    },
-    "/contacts/create": {
-      "post": {
-        "tags": [
-          "Contacts"
-        ],
-        "summary": "Creates a new contact",
-        "description": "Creates a new contact and returns its data",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-               "in": "header",
-               "name": "Authorization",
-               "example": "Bearer eyJhbGciOiJIUz21NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlATRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob4N0LmxvY2FsIiwiaWF0IjoxNjM23jQxMDExLCJleHAiOjE2MzY2NDEzMTF9._KhQmMHsai5CVFY2PF4QX0bp3T6puteJkkaWLfOWRZ8",
-               "description": "Access token"
-          },
-          {
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/contactData"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Succesful contact creation",
-            "schema": {
-              "$ref": "#/definitions/contactDataResult"
-            }
-          },
-          "400": {
-            "description": "Invalid input"
-          },
-          "401": {
-              "description": "User is not authenticated"
-          },
-          "403": {
-              "description": "Expired access token"
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "userData": {
-        "type": "object",
-        "properties": {
-            "email": {
-                "type": "string",
-                "required": true,
-                "example": "mail@example.com",
-                "description": "A valid email address"
-            },
-            "password": {
-                "type": "string",
-                "required": true,
-                "example": "Secr3tPassW0rd.",
-                "description": "A password (no special limitations)"
+        },
+        "/contacts/create": {
+            "post": {
+                "tags": ["Contacts"],
+                "summary": "Creates a new contact",
+                "description": "Creates a new contact and returns its data",
+                "consumes": ["application/json"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "example": "Bearer eyJhbGciOiJIUz21NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlATRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob4N0LmxvY2FsIiwiaWF0IjoxNjM23jQxMDExLCJleHAiOjE2MzY2NDEzMTF9._KhQmMHsai5CVFY2PF4QX0bp3T6puteJkkaWLfOWRZ8",
+                        "description": "Access token"
+                    },
+                    {
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/contactData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succesful contact creation",
+                        "schema": {
+                            "$ref": "#/definitions/contactDataResult"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "401": {
+                        "description": "User is not authenticated"
+                    },
+                    "403": {
+                        "description": "Expired access token"
+                    }
+                }
             }
         }
     },
-    "userDataResult": {
-        "type": "object",
-        "properties": {
-            "email": {
-                "type": "string",
-                "example": "mail@example.com",
-                "description": "A valid email address"
-            },
-            "accessToken": {
-                "type": "string",
-                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0L2xvY2FsIiwiaWF0IjoxNjsdNjYyNTE4LCJleHAiOjE2MzY2NjI4MTh9.CE-Ms608OyeeWd3dNxNyGf69omPceekoQoPpYkk1szY",
-                "description": "An access token used for authentication requests"
-            },
-            "refreshToken": {
-                "type": "string",
-                "example": "eyJhbGciO2JDUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjsNjYyNTE4fQ.5IVT-on_FcnW0Lt2i6ddpjzHrc3dIpoYUzt0qyJA8fo",
-                "description": "A refresh token used for refreshing expired access tokens"
+    "definitions": {
+        "userData": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "required": true,
+                    "example": "mail@example.com",
+                    "description": "A valid email address"
+                },
+                "password": {
+                    "type": "string",
+                    "required": true,
+                    "example": "Secr3tPassW0rd.",
+                    "description": "A password (no special limitations)"
+                }
             }
-        }
-    },
-    "refreshToken": {
-        "type": "object",
-        "properties": {
-            "refreshToken": {
-                "type": "string",
-                "example": "eyJhbGciO2JDUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjsNjYyNTE4fQ.5IVT-on_FcnW0Lt2i6ddpjzHrc3dIpoYUzt0qyJA8fo",
-                "description": "A refresh token provided by API after login or registration"
+        },
+        "userDataResult": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "mail@example.com",
+                    "description": "A valid email address"
+                },
+                "accessToken": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0L2xvY2FsIiwiaWF0IjoxNjsdNjYyNTE4LCJleHAiOjE2MzY2NjI4MTh9.CE-Ms608OyeeWd3dNxNyGf69omPceekoQoPpYkk1szY",
+                    "description": "An access token used for authentication requests"
+                },
+                "refreshToken": {
+                    "type": "string",
+                    "example": "eyJhbGciO2JDUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjsNjYyNTE4fQ.5IVT-on_FcnW0Lt2i6ddpjzHrc3dIpoYUzt0qyJA8fo",
+                    "description": "A refresh token used for refreshing expired access tokens"
+                }
             }
-        }
-    },
-    "refreshTokenResult": {
-        "type": "object",
-        "properties": {
-            "accessToken": {
-                "type": "string",
-                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0L2xvY2FsIiwiaWF0IjoxNjsdNjYyNTE4LCJleHAiOjE2MzY2NjI4MTh9.CE-Ms608OyeeWd3dNxNyGf69omPceekoQoPpYkk1szY",
-                "description": "A refreshed access token"
+        },
+        "refreshToken": {
+            "type": "object",
+            "properties": {
+                "refreshToken": {
+                    "type": "string",
+                    "example": "eyJhbGciO2JDUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjsNjYyNTE4fQ.5IVT-on_FcnW0Lt2i6ddpjzHrc3dIpoYUzt0qyJA8fo",
+                    "description": "A refresh token provided by API after login or registration"
+                }
             }
-        }
-    }, 
-    "contactData": {
-        "type": "object",
-        "properties":  {
-            "lastName": {
-                "type": "string",
-                "required": true,
-                "example": "Doe",
-                "description": "Last name"
-            },
-            "firstName": {
-                "type": "string",
-                "required": false,
-                "example": "John",
-                "description": "First name"
-            },
-            "phone": {
-                "type": "string",
-                "required": false,
-                "example": "+420 888 333 222",
-                "description": "Phone number"
-            },
-            "address": {
-                "type": "string",
-                "required": false,
-                "example": "Prizova 284/5, 602 00 Brno",
-                "description": "Address"
+        },
+        "refreshTokenResult": {
+            "type": "object",
+            "properties": {
+                "accessToken": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlYTRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0L2xvY2FsIiwiaWF0IjoxNjsdNjYyNTE4LCJleHAiOjE2MzY2NjI4MTh9.CE-Ms608OyeeWd3dNxNyGf69omPceekoQoPpYkk1szY",
+                    "description": "A refreshed access token"
+                }
             }
-        }
-    },
-    "contactDataResult": {
-        "type": "object",
-        "properties": {
-            "lastName": {
-                "type": "string",
-                "example": "Doe",
-                "description": "Last name"
-            },
-            "firstName": {
-                "type": "string",
-                "example": "John",
-                "description": "First name"
-            },
-            "phone": {
-                "type": "string",
-                "example": "+420 888 333 222",
-                "description": "Phone number"
-            },
-            "address": {
-                "type": "string",
-                "example": "Prizova 284/5, 602 00 Brno",
-                "description": "Address"
-            },
-            "owner": {
-                "type": "string",
-                "example": "618c26ac1b3c4b14ad28b145",
-                "description": "ID of the user who created the contact"
+        },
+        "contactData": {
+            "type": "object",
+            "properties": {
+                "lastName": {
+                    "type": "string",
+                    "required": true,
+                    "example": "Doe",
+                    "description": "Last name"
+                },
+                "firstName": {
+                    "type": "string",
+                    "required": false,
+                    "example": "John",
+                    "description": "First name"
+                },
+                "phone": {
+                    "type": "string",
+                    "required": false,
+                    "example": "+420 888 333 222",
+                    "description": "Phone number"
+                },
+                "address": {
+                    "type": "string",
+                    "required": false,
+                    "example": "Prizova 284/5, 602 00 Brno",
+                    "description": "Address"
+                }
+            }
+        },
+        "contactDataResult": {
+            "type": "object",
+            "properties": {
+                "lastName": {
+                    "type": "string",
+                    "example": "Doe",
+                    "description": "Last name"
+                },
+                "firstName": {
+                    "type": "string",
+                    "example": "John",
+                    "description": "First name"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "+420 888 333 222",
+                    "description": "Phone number"
+                },
+                "address": {
+                    "type": "string",
+                    "example": "Prizova 284/5, 602 00 Brno",
+                    "description": "Address"
+                },
+                "owner": {
+                    "type": "string",
+                    "example": "618c26ac1b3c4b14ad28b145",
+                    "description": "ID of the user who created the contact"
+                }
             }
         }
     }
-  }  
 }

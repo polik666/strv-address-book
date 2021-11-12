@@ -1,26 +1,26 @@
 function initializeSwaggger(app) {
-    const swaggerUi = require('swagger-ui-express');
-    const swaggerDocument = require('../swagger.json');
+    const swaggerUi = require("swagger-ui-express")
+    const swaggerDocument = require("../swagger.json")
     const options = {
         swaggerOptions: {
             plugins: [
-                function() {
+                function () {
                     return {
                         statePlugins: {
                             spec: {
                                 wrapSelectors: {
-                                    allowTryItOutFor: () => () => false
-                                }
-                            }
-                        }
+                                    allowTryItOutFor: () => () => false,
+                                },
+                            },
+                        },
                     }
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 
-    console.log('Swagger initialized')
+    console.log("Swagger initialized")
 }
 
-module.exports = {initializeSwaggger}
+module.exports = { initializeSwaggger }
