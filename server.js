@@ -25,9 +25,7 @@ if(process.env.NODE_ENV !== 'test'){
 
     console.log('Firebase initialized')
 
-    const swaggerUi = require('swagger-ui-express');
-    const swaggerDocument = require('./swagger.json');
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    require('./utils/swagger-helper').initializeSwaggger(app)
 }
 else {
     console.log('Running in in-memory mode')

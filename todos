@@ -1,4 +1,4 @@
-swagger
+
 
 clean up
 remove console.logs
@@ -21,3 +21,4 @@ configurable everything (DBs)
 tests don't look like they finish they run. Missing DONE somewhere?
 CI
 deployment
+swagger

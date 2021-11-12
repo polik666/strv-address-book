@@ -47,7 +47,7 @@
           }
         }
       }
-    } ,
+    },
     "/account/login": {
       "post": {
         "tags": [
@@ -121,10 +121,54 @@
           }
         }
       }
-    } 
+    },
+    "/contacts/create": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Creates a new contact",
+        "description": "Creates a new contact and returns its data",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+               "in": "header",
+               "name": "Authorization",
+               "example": "Bearer eyJhbGciOiJIUz21NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGMyNmFjOGJlATRiMTRhZDY4YjE0NSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob4N0LmxvY2FsIiwiaWF0IjoxNjM23jQxMDExLCJleHAiOjE2MzY2NDEzMTF9._KhQmMHsai5CVFY2PF4QX0bp3T6puteJkkaWLfOWRZ8",
+               "description": "Access token"
+          },
+          {
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/contactData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful contact creation",
+            "schema": {
+              "$ref": "#/definitions/contactDataResult"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+              "description": "User is not authenticated"
+          },
+          "403": {
+              "description": "Expired access token"
+          }
+        }
+      }
+    }
   },
-
-  
   "definitions": {
     "userData": {
         "type": "object",
@@ -182,6 +226,65 @@
                 "description": "A refreshed access token"
             }
         }
+    }, 
+    "contactData": {
+        "type": "object",
+        "properties":  {
+            "lastName": {
+                "type": "string",
+                "required": true,
+                "example": "Doe",
+                "description": "Last name"
+            },
+            "firstName": {
+                "type": "string",
+                "required": false,
+                "example": "John",
+                "description": "First name"
+            },
+            "phone": {
+                "type": "string",
+                "required": false,
+                "example": "+420 888 333 222",
+                "description": "Phone number"
+            },
+            "address": {
+                "type": "string",
+                "required": false,
+                "example": "Prizova 284/5, 602 00 Brno",
+                "description": "Address"
+            }
+        }
+    },
+    "contactDataResult": {
+        "type": "object",
+        "properties": {
+            "lastName": {
+                "type": "string",
+                "example": "Doe",
+                "description": "Last name"
+            },
+            "firstName": {
+                "type": "string",
+                "example": "John",
+                "description": "First name"
+            },
+            "phone": {
+                "type": "string",
+                "example": "+420 888 333 222",
+                "description": "Phone number"
+            },
+            "address": {
+                "type": "string",
+                "example": "Prizova 284/5, 602 00 Brno",
+                "description": "Address"
+            },
+            "owner": {
+                "type": "string",
+                "example": "618c26ac1b3c4b14ad28b145",
+                "description": "ID of the user who created the contact"
+            }
+        }
     }
-  }
+  }  
 }

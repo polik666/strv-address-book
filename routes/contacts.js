@@ -34,7 +34,7 @@ async function processContactData(req, res, next) {
 
     var errors = contact.validate()
 
-    if(errors.length != 0) {
+    if (errors.length != 0) {
         return res.status(400).json(errors)
     }
     
