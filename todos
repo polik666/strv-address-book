@@ -1,5 +1,4 @@
 clean up (formatting, etc.)
-fbkey.json - move to ENV
 
 TEST LOCAL - TESTS + API + SWAGGER
 TEST REMOTE - CI
