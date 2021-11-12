@@ -1,7 +1,4 @@
-Use multple databases for running tests, remove the InMemory storage
-
 clean up (formatting, etc.)
-remove console.logs
 fbkey.json - move to ENV
 
 TEST LOCAL - TESTS + API + SWAGGER
