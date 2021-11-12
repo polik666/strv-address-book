@@ -1,10 +1,17 @@
-
+Use multple databases for running tests, remove the InMemory storage
 
 clean up (formatting, etc.)
 remove console.logs
-remove 500?
+fbkey.json - move to ENV
 
-Use multple databases for running tests, remove the InMemory storage
+TEST LOCAL - TESTS + API + SWAGGER
+TEST REMOTE - CI
+TEST REMOTE - API + SWAGGER
+
+Configure users as described in the assignment
+Verify the assigment
+
+Remove this TODO LIST
 
 ################ DONE ################
 
