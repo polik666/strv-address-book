@@ -1,14 +1,13 @@
 const express = require('express')
+const router = express.Router()
+const middleware = require('../utils/middleware')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
-const router = express.Router()
-
 const User = require('../models/user')
 const RefreshToken = require('../models/refresh-token')
 const dataLayer =  require('../data-layer/data-layer-provider').getDataLayer();
 
-router.post('/register', processUserData, async (req, res) =>  {
+router.post('/register', middleware.processUserData, async (req, res) =>  {
     try {
         if(await dataLayer.userExists(req.user.email)) {
             return res.status(400).send('User already exists')
@@ -25,7 +24,7 @@ router.post('/register', processUserData, async (req, res) =>  {
     }
 })
 
-router.post('/login', processUserData, async (req, res) =>  {
+router.post('/login', middleware.processUserData, async (req, res) =>  {
     let user = null
     try {
         user = await dataLayer.getUserByEmail(req.user.email)
@@ -45,7 +44,7 @@ router.post('/login', processUserData, async (req, res) =>  {
             return
         }
         else {
-            res.send(401).send('Unknown user or password')
+            res.status(401).send('Unknown user or password')
         }
       } catch (err) {
           console.error(err);         
@@ -88,19 +87,6 @@ async function prepareLoginRespose(user) {
 
 function createJwt(user) {
     return jwt.sign({id:user.id, email:user.email}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_EXPIRATION || '10m' })
-}
-
-function processUserData(req, res, next) {
-    const user = new User(req.body.email, req.body.password)
-    var errors = user.validate()
-
-    if(errors.length != 0) {
-        return res.status(400).json(errors)
-    }
-
-    req.user = user
-
-    next()
 }
 
 module.exports = router

@@ -1,14 +1,12 @@
 
 
-clean up
+clean up (formatting, etc.)
 remove console.logs
 remove 500?
 
-move middlewares to a separate file?
-
 Use multple databases for running tests, remove the InMemory storage
 
-############### DONE ###############
+################ DONE ################
 
 Firebase
 contacts
@@ -22,3 +20,4 @@ tests don't look like they finish they run. Missing DONE somewhere?
 CI
 deployment
 swagger
+move middlewares to a separate file?
