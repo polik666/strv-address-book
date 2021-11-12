@@ -38,27 +38,23 @@ router.post("/refreshtoken", async (req, res) => {
     const reqRefreshToken = req.body.refreshToken
     if (reqRefreshToken == null) return res.sendStatus(401)
 
-    if (!(await dataLayer.refreshTokenExists(reqRefreshToken)))
+    if (!(await dataLayer.refreshTokenExists(reqRefreshToken))) {
         return res.sendStatus(403)
+    }
 
-    jwt.verify(
-        reqRefreshToken,
-        process.env.REFRESH_TOKEN_SECRET,
-        (err, user) => {
-            if (err) return res.sendStatus(403)
-
-            const accessToken = createJwt(user)
-            res.json({ accessToken: accessToken })
+    jwt.verify(reqRefreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) {
+            return res.sendStatus(403)
         }
-    )
+
+        const accessToken = createJwt(user)
+        res.json({ accessToken: accessToken })
+    })
 })
 
 async function prepareLoginRespose(user) {
     const accessToken = createJwt(user)
-    const refreshToken = jwt.sign(
-        { id: user.id, email: user.email },
-        process.env.REFRESH_TOKEN_SECRET
-    )
+    const refreshToken = jwt.sign({ id: user.id, email: user.email }, process.env.REFRESH_TOKEN_SECRET)
 
     let rt = new RefreshToken(refreshToken)
     await dataLayer.createRefreshToken(rt)
@@ -71,11 +67,7 @@ async function prepareLoginRespose(user) {
 }
 
 function createJwt(user) {
-    return jwt.sign(
-        { id: user.id, email: user.email },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: process.env.JWT_EXPIRATION || "10m" }
-    )
+    return jwt.sign({ id: user.id, email: user.email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_EXPIRATION || "10m" })
 }
 
 module.exports = router

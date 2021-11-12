@@ -23,11 +23,11 @@ Content-Type: application/json
 
 ###
 POST https://strv-addressbook-knotek-pavel.herokuapp.com/contacts/create
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhdmVsQGxvY2FsaG9zdC5sb2NhbCIsImlhdCI6MTYzNjY0MzI0MywiZXhwIjoxNjM2NjQzNTQzfQ.qJMjOvkgBf8GoouV6AC1eElpqzU4ZzFuaSgVarS3dWU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGU2ZDI5ZDIwZmY3YmFmZTJhYWI4MCIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjM2NzI3ODI1LCJleHAiOjE2MzY3MjgxMjV9.34yNPxim1O1s_TXFo26APaxO5RFNKWO1HKVq176wZrQ
 Content-Type: application/json
 
 {
-    "lastName": "Oskar",
-    "firstName": "Morce",
+    "lastName": "Morce",
+    "firstName": "Oskar",
     "address": "Doometshek Yikohvi oobookey"
 }

@@ -21,7 +21,7 @@ function initDatabases() {
             auth_provider_x509_cert_url: process.env.FIREBASE_CERT_AUTH_PROVIDER_X509_CERT_URL,
             client_x509_cert_url: process.env.FIREBASE_CERT_CLIENT_X509_CERT_URL,
         }),
-        databaseURL: process.env.DB_FIREBASE_URL
+        databaseURL: process.env.DB_FIREBASE_URL,
     })
 
     console.log("Firebase initialized")
