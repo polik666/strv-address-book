@@ -55,7 +55,7 @@ async function prepareLoginRespose(user) {
     const accessToken = createJwt(user)
     const refreshToken = jwt.sign({ id: user.id, email: user.email }, process.env.REFRESH_TOKEN_SECRET)
 
-    let rt = new RefreshToken(refreshToken)
+    let rt = new RefreshToken(refreshToken, user.id)
     await dataLayer.createRefreshToken(rt)
 
     return {

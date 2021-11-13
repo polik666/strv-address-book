@@ -1,7 +1,9 @@
 class RefreshToken {
     token
-    constructor(token) {
+    userId
+    constructor(token, userId) {
         this.token = token
+        this.userId = userId
     }
 }
 
