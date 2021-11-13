@@ -1,4 +1,3 @@
-TEST REMOTE - CI
 TEST REMOTE - API + SWAGGER
 
 Add michal.klacko@strv.com (MichalKlacko) and jan.hovorka@strv.com (HonzaHovorka) to Git hub
@@ -29,3 +28,4 @@ move middlewares to a separate file?
 Verify the assigment
 
 TEST LOCAL - TESTS + API + SWAGGER
+TEST REMOTE - CI
