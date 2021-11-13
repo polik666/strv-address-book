@@ -137,7 +137,7 @@
                         "description": "User is not authenticated"
                     },
                     "403": {
-                        "description": "Expired access token"
+                        "description": "Expired or invalid access token"
                     }
                 }
             }

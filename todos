@@ -1,4 +1,3 @@
-TEST LOCAL - TESTS + API + SWAGGER
 TEST REMOTE - CI
 TEST REMOTE - API + SWAGGER
 
@@ -28,3 +27,5 @@ deployment
 swagger
 move middlewares to a separate file?
 Verify the assigment
+
+TEST LOCAL - TESTS + API + SWAGGER

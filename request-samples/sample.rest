@@ -2,7 +2,7 @@ POST http://localhost:3000/account/register
 Content-Type: application/json
 
 {
-    "email": "pavel45@localhost.local",
+    "email": "pavel@localhost.local",
     "password": "MyP4ssw0rd."
 }
 ###
@@ -10,7 +10,7 @@ POST http://localhost:3000/account/login
 Content-Type: application/json
 
 {
-    "email": "pavelxx2x@localhost.local",
+    "email": "pavel@localhost.local",
     "password": "MyP4ssw0rd."
 }
 ###
@@ -18,12 +18,12 @@ POST http://localhost:3000/account/refreshtoken
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGU1NmYyZjRkMTE2OTkzNzBkMmE1OCIsImVtYWlsIjoicGF2ZWx4eDJ4QGxvY2FsaG9zdC5sb2NhbCIsImlhdCI6MTYzNjcxODQxMX0.HyH064v4Umcqs5OG4-EK4oHo9LHM8rPqdZ4NkRTIuyg"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGY3ZmFjOTg0NDIzNGJhZjIxOTFhZSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjM2Nzk0Mjg0fQ.FbPS2239Rzhw7dcd-03xZWABSs4ATFgaEM2bFmA6vbk"
 }
 
 ###
 POST http://localhost:3000/contacts/create
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGU1NmYyZjRkMTE2OTkzNzBkMmE1OCIsImVtYWlsIjoicGF2ZWx4eDJ4QGxvY2FsaG9zdC5sb2NhbCIsImlhdCI6MTYzNjcxODQxNywiZXhwIjoxNjM2NzE4NzE3fQ.OqgztX9NpudNMY9AyUOL0PR3L-kYqqmCQqWCOYLuB8U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGY3ZmFjOTg0NDIzNGJhZjIxOTFhZSIsImVtYWlsIjoicGF2ZWxAbG9jYWxob3N0LmxvY2FsIiwiaWF0IjoxNjM2Nzk0MzY0LCJleHAiOjE2MzY3OTQ5NjR9.6jW-shHYLC63Aro29IIVlyxqibWzKU8Ohv85uCDCPug
 Content-Type: application/json
 
 {
