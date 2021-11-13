@@ -2,8 +2,13 @@ TEST LOCAL - TESTS + API + SWAGGER
 TEST REMOTE - CI
 TEST REMOTE - API + SWAGGER
 
-Configure users as described in the assignment
-Verify the assigment
+Add michal.klacko@strv.com (MichalKlacko) and jan.hovorka@strv.com (HonzaHovorka) to Git hub
+Add michal.klacko@strv.com and jan.hovorka@strv.com to Heroku.
+Add michal.klacko@strv.com and jan.hovorka@strv.com to Mongo
+Add michal.klacko@strv.com and jan.hovorka@strv.com to Firebase.
+
+Send the links to GitHub, Heroku app, MongoDB, Firebase
+Send Code via link
 
 Remove this TODO LIST
 
@@ -22,3 +27,4 @@ CI
 deployment
 swagger
 move middlewares to a separate file?
+Verify the assigment

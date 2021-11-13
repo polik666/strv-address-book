@@ -28,7 +28,6 @@ router.post("/login", middleware.processUserData, async (req, res) => {
     if (await bcrypt.compare(req.user.password, user.password)) {
         const loginResponse = await prepareLoginRespose(user)
         res.json(loginResponse)
-        return
     } else {
         res.status(401).send("Unknown user or password")
     }
